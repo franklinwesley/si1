@@ -1,1 +1,1 @@
-este repositório tem o código para lab1
+filho de uma equa
