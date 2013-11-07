@@ -21,8 +21,10 @@ public class NumeroPorExtenso {
 			return escreverCentenasPorExtenso(numero);
 		} else if (numero >= 1000 && numero < 1000000) {
 			return escreverMilharesPorExtenso(numero);
+		} else if (numero >= 1000000 && numero <= 1000000000) {
+			return escreverMilhoesPorExtenso(numero);
 		}
-		return null;
+		return "Número muito grande";
 	}
 	
 	public String escreverNumerosAte19PorExtenso(int numero) {
