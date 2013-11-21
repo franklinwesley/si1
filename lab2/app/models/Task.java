@@ -1,23 +1,30 @@
 package models;
 
 import java.util.*;
+import play.db.ebean.*;
 import play.data.validation.Constraints.*;
+import javax.persistence.*;
 
-public class Task {
+@Entity
+public class Task extends Model{
     
-  public Long id;
+	@Id
+	public Long id;
+	  
+	@Required
+	public String label;  
+	public static Finder<Long,Task> find = new Finder(Long.class, Task.class);
   
-  @Required
-  public String label;
-  
-  public static List<Task> all() {
-    return new ArrayList<Task>();
-  }
-  
-  public static void create(Task task) {
-  }
-  
-  public static void delete(Long id) {
-  }
+	public static List<Task> all() {
+		return find.all();
+	}
+	
+	public static void create(Task task) {
+		task.save();
+	}
+
+	public static void delete(Long id) {
+		find.ref(id).delete();
+	}
     
 }
