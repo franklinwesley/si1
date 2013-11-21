@@ -9,14 +9,18 @@ import javax.persistence.*;
 public class Task extends Model{
     // TODO declarar atributos privados
 	@Id
-	public Long id;
+	private Long id;
 	  
 	@Required
 	public String label;  
 	public static Finder<Long,Task> find = new Finder(Long.class, Task.class);
   
+	public Long getId() {
+		return id;
+	}
+	
 	public static List<Task> all() {
-		return find.all();
+		  return find.all();
 	}
 	
 	public static void create(Task task) {
