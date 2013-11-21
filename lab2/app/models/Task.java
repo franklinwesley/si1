@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 public class Task extends Model{
-    
+    // TODO declarar atributos privados
 	@Id
 	public Long id;
 	  
