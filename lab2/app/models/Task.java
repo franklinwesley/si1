@@ -12,7 +12,11 @@ public class Task extends Model{
 	private Long id;
 	  
 	@Required
-	public String label;  
+	public String registrar;
+	public String descrição;
+	public String prioridade;
+	public String projeto;
+	
 	public static Finder<Long,Task> find = new Finder(Long.class, Task.class);
   
 	public Long getId() {

@@ -9,7 +9,11 @@
     <ul>
         @for(task <- tasks) {
             <li>
-                @task.label
+                @task.registrar
+                @task.descrição
+                @task.projeto
+                @task.prioridade
+                
                 
                 @form(routes.Application.deleteTask(task.getId())) {
                     <input type="submit" value="Excluir">
@@ -22,7 +26,13 @@
     
     @form(routes.Application.newTask()) {
         
-        @inputText(taskForm("label")) 
+        @inputText(taskForm("registrar")) 
+        
+        @inputText(taskForm("descrição")) 
+        
+        @inputText(taskForm("projeto"))
+        
+        @inputText(taskForm("prioridade"))
         
         <input type="submit" value="Criar">
         
