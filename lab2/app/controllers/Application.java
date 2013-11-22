@@ -19,7 +19,6 @@ public class Application extends Controller {
     }
       
     public static Result newTask() {
-//    	TODO mudar os mensagem para portugues
     	Form<Task> filledForm = taskForm.bindFromRequest();
     	if(filledForm.hasErrors()) {
     		return badRequest(views.html.index.render(Task.all(), filledForm));

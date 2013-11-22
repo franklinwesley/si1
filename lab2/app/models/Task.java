@@ -1,12 +1,14 @@
 package models;
 
 import java.util.*;
+
 import play.db.ebean.*;
 import play.data.validation.Constraints.*;
+
 import javax.persistence.*;
 
 @Entity
-public class Task extends Model{
+public class Task extends Model implements Comparable<Object> {
     // TODO declarar atributos privados
 	@Id
 	private Long id;
@@ -14,7 +16,7 @@ public class Task extends Model{
 	@Required
 	public String registrar;
 	public String descrição;
-	public String prioridade;
+	public int prioridade;
 	public String projeto;
 	
 	public static Finder<Long,Task> find = new Finder(Long.class, Task.class);
@@ -34,5 +36,18 @@ public class Task extends Model{
 	public static void delete(Long id) {
 		find.ref(id).delete();
 	}
-    
+
+	@Override
+	public int compareTo(Object arg0) {
+		int result;
+		if (prioridade == ((Task)arg0).prioridade) {
+			result = 0;
+		} else if (prioridade >= ((Task)arg0).prioridade) {
+			result = 1;
+		} else {
+			result = -1;
+		}
+		return result;
+	}
+    	
 }

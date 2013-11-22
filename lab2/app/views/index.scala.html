@@ -6,23 +6,34 @@
     
     <h1>@tasks.size() Tarefa(s)</h1>
     
+    
     <ul>
-        @for(task <- tasks) {
-            <li>
-                @task.registrar
-                @task.descrição
-                @task.projeto
-                @task.prioridade
-                
-                
-                @form(routes.Application.deleteTask(task.getId())) {
-                    <input type="submit" value="Excluir">
-                }
-            </li>
-        }
+     
+    	@if(tasks.size() != 0){
+    	
+    		<h2>Tarefa(s) a fazer</h2>
+    	
+   			@Collections.sort(tasks)
+   			
+       		@for(task <- tasks) {
+           		<li>
+               		@task.registrar
+               		@task.descrição
+               		@task.projeto
+               		@task.prioridade
+               
+               		
+               		@form(routes.Application.deleteTask(task.getId())) {
+                   		<input type="submit" value="Excluir">
+               		}
+           		</li>
+       		}
+       	}
+        
     </ul>
     
-    <h2>Adicionar uma nova tarefa</h2>
+    
+    <h3>Adicionar uma nova tarefa</h3>
     
     @form(routes.Application.newTask()) {
         
