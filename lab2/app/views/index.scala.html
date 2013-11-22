@@ -26,6 +26,10 @@
                		@form(routes.Application.deleteTask(task.getId())) {
                    		<input type="submit" value="Excluir">
                		}
+               		
+               		@form(routes.Application.done()) {
+               			<input type="submit" value="Feito">
+               		}
            		</li>
        		}
        	}

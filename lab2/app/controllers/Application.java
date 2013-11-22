@@ -27,6 +27,11 @@ public class Application extends Controller {
     	    return redirect(routes.Application.tasks());  
     	}
     }
+    
+    public static Result done() {
+    	Task.done(taskForm.get());
+    	return redirect(routes.Application.tasks());  
+    }
       
     public static Result deleteTask(Long id) {
     	Task.delete(id);

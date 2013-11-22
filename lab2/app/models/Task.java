@@ -36,6 +36,10 @@ public class Task extends Model implements Comparable<Object> {
 	public static void delete(Long id) {
 		find.ref(id).delete();
 	}
+	
+	public static void done(Task task) {
+		task.update();
+	}
 
 	@Override
 	public int compareTo(Object arg0) {
