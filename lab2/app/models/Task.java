@@ -15,8 +15,10 @@ public class Task extends Model implements Comparable<Object> {
 	  
 	@Required
 	public String registrar;
-	public String descrição;
+	public boolean feita = false;
+	@Required
 	public int prioridade;
+	@Required
 	public String projeto;
 	
 	public static Finder<Long,Task> find = new Finder(Long.class, Task.class);
@@ -37,8 +39,14 @@ public class Task extends Model implements Comparable<Object> {
 		find.ref(id).delete();
 	}
 	
-	public static void done(Task task) {
-		task.update();
+	public static void update(Long id) {
+		Task task = find.ref(id);
+        if (task.feita == true) {
+        	task.feita = false;
+        } else{
+        	task.feita = true;
+        }
+        task.update();
 	}
 
 	@Override

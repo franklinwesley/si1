@@ -2,55 +2,91 @@
 
 @import helper._
 
-@main("Lista de Tarefas") {
+@main("Lista de Tarefas") {            
+                           
+	@Collections.sort(tasks)
+                             
+    <center><h1>@tasks.size() tarefa(s)</h1></center>
     
-    <h1>@tasks.size() Tarefa(s)</h1>
-    
-    
-    <ul>
-     
-    	@if(tasks.size() != 0){
-    	
-    		<h2>Tarefa(s) a fazer</h2>
-    	
-   			@Collections.sort(tasks)
-   			
-       		@for(task <- tasks) {
-           		<li>
-               		@task.registrar
-               		@task.descrição
-               		@task.projeto
-               		@task.prioridade
-               
-               		
-               		@form(routes.Application.deleteTask(task.getId())) {
-                   		<input type="submit" value="Excluir">
-               		}
-               		
-               		@form(routes.Application.done()) {
-               			<input type="submit" value="Feito">
-               		}
-           		</li>
-       		}
-       	}
-        
-    </ul>
-    
-    
-    <h3>Adicionar uma nova tarefa</h3>
+    <div id="formulario">
+    <center>
+    <h2>Adicione uma nova tarefa</h2>
     
     @form(routes.Application.newTask()) {
         
-        @inputText(taskForm("registrar")) 
-        
-        @inputText(taskForm("descrição")) 
-        
-        @inputText(taskForm("projeto"))
-        
-        @inputText(taskForm("prioridade"))
-        
-        <input type="submit" value="Criar">
-        
+        @inputText(taskForm("registrar"), '_label->"Descrição")
+        @inputText(taskForm("prioridade"), '_label->"Prioridade")
+        @inputText(taskForm("projeto"), '_label->"Projeto")
+
+        <input type="submit" value="Criar" class="create">        
     }
+    </center>
+    </div>
+    
+    <div id="corpo" >
+    <table class="tabela" style="float:left;">
+            <tr style="background-color: transparent;">
+                    <th style="border:none;font-size: 20px;"> 
+                            Tarefas a Fazer 
+                    </th>
+            </tr>
+                   <tr style="background-color: #4876FF;">
+                       <th >PRIORIDADE</td>
+                       <th >PROJETO</td>
+                       <th >DESCRIÇÃO</td>
+                       <th >AÇÕES</td>
+               </tr>
+        @for(task <- tasks) {
+                @if(task.feita == false) {
+            <tr>
+                    <td >@task.prioridade</td>
+                    <td >@task.projeto</td>
+                    <td >@task.registrar</td>
+                
+                <td >
+                @form(routes.Application.update(task.getId())) {
+                        <input type="submit" value="Feito" class="done">
+                }
+                @form(routes.Application.deleteTask(task.getId())) {
+                    <input type="submit" value="Deletar" class="del">
+                }
+                </td>
+            </tr>
+            }
+        }
+    </table>
+    <table class="tabela" style="float:right;margin-right:20px;">
+            <tr style="background-color: transparent;">
+                    <th style="border:none;font-size: 20px;"> 
+                            Tarefas Feitas
+                    </th> 
+            </tr>
+                   <tr style="background-color: #4876FF;">
+                       <th >PRIORIDADE</td>
+                       <th >PROJETO</td>
+                       <th >DESCRIÇÃO</td>
+                       <th >AÇÕES</td>
+               </tr>
+        @for(task <- tasks) {
+                @if(task.feita == true) {
+            <tr>
+                    <td >@task.prioridade</td>
+                    <td >@task.projeto</td>
+                    <td >@task.registrar</td>
+                <td >
+                @form(routes.Application.deleteTask(task.getId())) {
+                    <input type="submit" value="Deletar" class="del">
+                }
+                </td>
+            </tr>
+            }
+        }
+    </table>
+    </div>
+    
     
 }
+
+    
+    
+    
