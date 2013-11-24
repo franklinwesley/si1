@@ -5,24 +5,15 @@
 @main("Lista de Tarefas") {            
                            
 	@Collections.sort(tasks)
-                             
-    <center><h1>@tasks.size() tarefa(s)</h1></center>
-    
-    <div id="formulario">
-    <center>
-    <h2>Adicione uma nova tarefa</h2>
-    
-    @form(routes.Application.newTask()) {
-        
-        @inputText(taskForm("registrar"), '_label->"Descrição")
-        @inputText(taskForm("prioridade"), '_label->"Prioridade")
-        @inputText(taskForm("projeto"), '_label->"Projeto")
 
-        <input type="submit" value="Criar" class="create">        
-    }
-    </center>
-    </div>
-    
+	<style type="text/css">
+  body {
+	background-image: url("http://imageshack.com/a/img21/9336/p81.gif") }
+  </style>
+		
+		                          
+    <center><h1>@tasks.size() Tarefa(s)</h1></center>
+     
     <div id="corpo" >
     <table class="tabela" style="float:left;">
             <tr style="background-color: transparent;">
@@ -30,14 +21,14 @@
                             Tarefas a Fazer 
                     </th>
             </tr>
-                   <tr style="background-color: #4876FF;">
+                   <tr style="background-color: #8B8B7A;">
                        <th >PRIORIDADE</td>
                        <th >PROJETO</td>
                        <th >DESCRIÇÃO</td>
                        <th >AÇÕES</td>
                </tr>
         @for(task <- tasks) {
-                @if(task.feita == false) {
+                @if(task.isFeito() == false) {
             <tr>
                     <td >@task.prioridade</td>
                     <td >@task.projeto</td>
@@ -61,14 +52,14 @@
                             Tarefas Feitas
                     </th> 
             </tr>
-                   <tr style="background-color: #4876FF;">
+                   <tr style="background-color: #8B8B7A;">
                        <th >PRIORIDADE</td>
                        <th >PROJETO</td>
                        <th >DESCRIÇÃO</td>
                        <th >AÇÕES</td>
                </tr>
         @for(task <- tasks) {
-                @if(task.feita == true) {
+                @if(task.isFeito() == true) {
             <tr>
                     <td >@task.prioridade</td>
                     <td >@task.projeto</td>
@@ -84,9 +75,28 @@
     </table>
     </div>
     
-    
-}
+    <div id="formulario">   
+    	<center>
+			<h2>Adicione uma nova tarefa</h2>
+		</center>
+    	<STYLE> 
+		<!-- 
+		.test{position: absolute; top: 125px; left: 550px;} 
+		--> 
+		</STYLE>  
+		<BODY> 
+		<DIV class=test> 
+			<center>
+    		@form(routes.Application.newTask()) {
+        
+        		@inputText(taskForm("registrar"), '_label->"Descrição") 
+        		@inputText(taskForm("prioridade"), '_label->"Prioridade")
+        		@inputText(taskForm("projeto"), '_label->"Projeto")
 
-    
-    
-    
+        		<input type="submit" value="Criar" class="create">        
+    		}
+ 			</center>
+		</DIV> 
+		</BODY> 
+	</div>
+}

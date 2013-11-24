@@ -7,24 +7,45 @@ import play.data.validation.Constraints.*;
 
 import javax.persistence.*;
 
+@SuppressWarnings("serial")
 @Entity
 public class Task extends Model implements Comparable<Object> {
-    // TODO declarar atributos privados
+
 	@Id
 	private Long id;
-	  
 	@Required
 	public String registrar;
-	public boolean feita = false;
+	private boolean feito = false;
 	@Required
 	public int prioridade;
 	@Required
 	public String projeto;
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Finder<Long,Task> find = new Finder(Long.class, Task.class);
   
 	public Long getId() {
 		return id;
+	}
+	
+	public boolean isFeito() {
+		return feito;
+	}
+
+	public void setFeito(boolean feito) {
+		this.feito = feito;
+	}
+
+	public String getRegistrar() {
+		return registrar;
+	}
+
+	public int getPrioridade() {
+		return prioridade;
+	}
+
+	public String getProjeto() {
+		return projeto;
 	}
 	
 	public static List<Task> all() {
@@ -41,10 +62,10 @@ public class Task extends Model implements Comparable<Object> {
 	
 	public static void update(Long id) {
 		Task task = find.ref(id);
-        if (task.feita == true) {
-        	task.feita = false;
+        if (task.isFeito() == true) {
+        	task.setFeito(false);
         } else{
-        	task.feita = true;
+        	task.setFeito(true);
         }
         task.update();
 	}
