@@ -14,12 +14,12 @@ public class Task extends Model implements Comparable<Object> {
 	@Id
 	private Long id;
 	@Required
-	public String registrar;
+	private static String registrar;
 	private boolean feito = false;
 	@Required
-	public int prioridade;
+	private static int prioridade;
 	@Required
-	public String projeto;
+	private static String projeto;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Finder<Long,Task> find = new Finder(Long.class, Task.class);
@@ -28,6 +28,18 @@ public class Task extends Model implements Comparable<Object> {
 		return id;
 	}
 	
+	public static void setRegistrar(String descricao) {
+		registrar = descricao;
+	}
+
+	public static void setPrioridade(int newPrioridade) {
+		prioridade = newPrioridade;
+	}
+
+	public static void setProjeto(String newProjeto) {
+		projeto = newProjeto;
+	}
+
 	public boolean isFeito() {
 		return feito;
 	}
@@ -52,7 +64,11 @@ public class Task extends Model implements Comparable<Object> {
 		  return find.all();
 	}
 	
+	@SuppressWarnings("static-access")
 	public static void create(Task task) {
+		setRegistrar(task.registrar);
+		setProjeto(task.projeto);
+		setPrioridade(task.prioridade);
 		task.save();
 	}
 
@@ -70,6 +86,7 @@ public class Task extends Model implements Comparable<Object> {
         task.update();
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public int compareTo(Object arg0) {
 		int result;
