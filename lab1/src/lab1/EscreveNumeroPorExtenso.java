@@ -11,7 +11,7 @@ public class EscreveNumeroPorExtenso {
 			entrada = entrada(scanner);
 		} while (entrada.equals(""));
 		while (!isInt(entrada)) {
-			System.out.println("Você deve informar um número.");
+			System.out.println("VocÃª deve informar um nÃºmero.");
 			entrada = entrada(scanner);
 		}
 		NumeroPorExtenso num = new NumeroPorExtenso();
@@ -26,7 +26,7 @@ public class EscreveNumeroPorExtenso {
 	}
 	
 	public static String entrada (Scanner sc) {
-		System.out.print("Informe um número: ");
+		System.out.print("Informe um nï¿½mero: ");
 		String entrada = sc.nextLine();
 		return entrada;
 	}
